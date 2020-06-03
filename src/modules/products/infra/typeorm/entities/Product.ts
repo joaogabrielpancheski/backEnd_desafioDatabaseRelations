@@ -4,9 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
-// import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
+import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
 
 @Entity('products')
 class Product {
@@ -21,6 +22,9 @@ class Product {
 
   @Column()
   quantity: number;
+
+  @OneToMany(_ => OrdersProducts, ordersProducts => ordersProducts.order)
+  order_products: OrdersProducts[];
 
   @CreateDateColumn()
   created_at: Date;
